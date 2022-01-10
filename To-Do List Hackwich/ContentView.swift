@@ -2,7 +2,7 @@
 //  ContentView.swift
 //  To-Do List Hackwich
 //
-//  Created by Student on 1/10/22.
+//  Created by Ryan Lim on 1/10/22.
 //
 
 import SwiftUI
