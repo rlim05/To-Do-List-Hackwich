@@ -3,19 +3,15 @@
 //  To-Do List Hackwich
 //
 //  Created by Ryan Lim on 1/10/22.
-//
 
 import SwiftUI
 
 struct ContentView: View {
-    @State private var toDoItems =
-        [ToDoItem (priority: "High", description: "Take out trash", dueDate: Date()),
-        ToDoItem (priority: "Medium", description: "Pick up clothes", dueDate: Date()),
-        ToDoItem (priority: "Low", description: "Eat a donut", dueDate: Date())]
+    @ObservedObject var toDoList = ToDoList()
     var body: some View {
         NavigationView{
             List{
-                ForEach(toDoItems) { item in
+                ForEach(toDoList.items) { item in
                     HStack {
                         VStack(alignment: .leading) {
                             Text(item.priority)
@@ -26,9 +22,9 @@ struct ContentView: View {
                         Text(item.dueDate, style: .date)
                     }
                 }
-                .onMove(perform: { indices, newOffset in toDoItems.move (fromOffsets: indices, toOffset: newOffset)
+                .onMove(perform: { indices, newOffset in toDoList.items.move (fromOffsets: indices, toOffset: newOffset)
                 })
-                .onDelete(perform: { indexSet in toDoItems.remove(atOffsets: indexSet)
+                .onDelete(perform: { indexSet in toDoList.items.remove(atOffsets: indexSet)
                 })
             }
             .navigationBarTitle("To Do List", displayMode: .inline)
